@@ -1,16 +1,31 @@
 program main
 
     use, intrinsic :: iso_fortran_env, only: sp => real32, dp => real64, i4 => int32, i8 => int64
-    use trabalho_final.f90
+    use calculo_orbitas
     
     implicit none
 
     ! Parâmetros da simulação
-    real(dp), parameter :: M = 2.0e36
+    
     real(dp), parameter :: t0 = 0.0
     real(dp), parameter :: tf = 10.0     ! Tempo final
-    real(dp), parameter :: h = 0.1       ! Passo de tempo
     real(dp), parameter :: r0 = 8.0e20_dp*Rs ! Raio inicial 
+
+    real(dp), allocatable :: t(:), r(:), phi(:)
+  real(dp), allocatable :: dr_dt(:), dphi_dt(:)
+  
+  n_steps = int((tf - t0) / h)
+  
+  allocate(t(0:n_steps), r(0:n_steps), phi(0:n_steps))
+  allocate(dr_dt(0:n_steps), dphi_dt(0:n_steps))
+  
+
+  t(0) = t0
+  r(0) = r0   
+  phi(0) = 0.0
+  
+  dr_dt(0) = 0.0
+  dphi_dt(0) = c*sqrt(G*M/(r(0)**3))
 
     
     ! Integração com verificação de validade

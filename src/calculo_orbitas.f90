@@ -1,30 +1,18 @@
 module calculo_orbitas
+
+use, intrinsic :: iso_fortran_env, only: sp => real32, dp => real64, i4 => int32, i8 => int64
 implicit none
   
 
   real(dp), parameter :: c = 2.99792458e8
   real(dp), parameter :: G = 6.67430e-11
+  real(dp), parameter :: M = 2.0e36
   real(dp), parameter :: Rs = 2.0*G*M/c**2
+  real(dp), parameter :: h = 0.1       ! Passo de tempo
   integer :: n_steps, i
   logical :: is_valid
     
-    ! Arrays para solução
-    real(dp), allocatable :: t(:), r(:), phi(:)
-    real(dp), allocatable :: dr_dt(:), dphi_dt(:)
     
-    n_steps = int((tf - t0) / h)
-    
-    allocate(t(0:n_steps), r(0:n_steps), phi(0:n_steps))
-    allocate(dr_dt(0:n_steps), dphi_dt(0:n_steps))
-    
-    ! Condições iniciais
-    t(0) = t0
-    r(0) = r0   
-    phi(0) = 0.0
-    
-    ! Velocidades iniciais para órbita circular
-    dr_dt(0) = 0.0
-    dphi_dt(0) = c*sqrt(G*M/(r(0)**3))  ! Velocidade angular kepleriana
 
   contains
 
@@ -38,7 +26,6 @@ implicit none
         
         is_valid = .true.
         
-        ! Verifica condições iniciais
         if (r0 <= Rs) then
             is_valid = .false.
             return
@@ -152,4 +139,4 @@ implicit none
     end subroutine save_results
 
 
-end module trabalho_final
+end module calculo_orbitas
