@@ -4,6 +4,10 @@ license = "license"
 author = "Jane Doe"
 maintainer = "jane.doe@example.com"
 copyright = "Copyright 2025, Jane Doe"
+[dependencies]
+
+fortran-astrodynamics-toolkit = { git="https://github.com/jacobwilliams/Fortran-Astrodynamics-Toolkit.git" }
+
 [build]
 auto-executables = true
 auto-tests = true
@@ -16,7 +20,5 @@ test = false
 implicit-typing = false
 implicit-external = false
 source-form = "free"
-[dependencies]
-pyplot-fortran.git = "https://github.com/jacobwilliams/pyplot-fortran.git"
-fortran-astrodynamics-toolkit = { git="https://github.com/jacobwilliams/Fortran-Astrodynamics-Toolkit.git" }
+
 

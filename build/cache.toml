@@ -1,0 +1,14 @@
+[trabalho_final]
+version = "0.1.0"
+proj-dir = "."
+[fortran-astrodynamics-toolkit]
+version = "0"
+proj-dir = "build/dependencies/fortran-astrodynamics-toolkit"
+git = "https://github.com/jacobwilliams/Fortran-Astrodynamics-Toolkit.git"
+rev = "7f5c23a7b474c25561da451840a05af113d65b44"
+[pyplot-fortran]
+version = "3.1.0"
+proj-dir = "build/dependencies/pyplot-fortran"
+git = "https://github.com/jacobwilliams/pyplot-fortran.git"
+rev = "60c5690c4e8d20d3185620db44111ca75ed7ebc3"
+

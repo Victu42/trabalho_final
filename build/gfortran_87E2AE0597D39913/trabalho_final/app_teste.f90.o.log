@@ -1,0 +1,6 @@
+app/teste.f90:4:12:
+
+    4 |   real :: a. a_phi
+      |            1
+Error: Syntax error in data declaration at (1)
+compilation terminated due to -fmax-errors=1.

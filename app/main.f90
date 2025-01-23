@@ -1,55 +1,44 @@
 program main
 
-    use, intrinsic :: iso_fortran_env, only: sp => real32, dp => real64, i4 => int32, i8 => int64
-    use calculo_orbitas
-    
-    implicit none
-
-    ! Parâmetros da simulação
-    
-    real(dp), parameter :: t0 = 0.0
-    real(dp), parameter :: tf = 10.0     ! Tempo final
-    real(dp), parameter :: r0 = 8.0e20_dp*Rs ! Raio inicial 
-
-    real(dp), allocatable :: t(:), r(:), phi(:)
-  real(dp), allocatable :: dr_dt(:), dphi_dt(:)
+  use, intrinsic :: iso_fortran_env, only: sp => real32, dp => real64, i4 => int32, i8 => int64
+  use calculo_orbitas
   
-  n_steps = int((tf - t0) / h)
-  
-  allocate(t(0:n_steps), r(0:n_steps), phi(0:n_steps))
-  allocate(dr_dt(0:n_steps), dphi_dt(0:n_steps))
-  
+  implicit none
 
-  t(0) = t0
-  r(0) = r0   
-  phi(0) = 0.0
-  
-  dr_dt(0) = 0.0
-  dphi_dt(0) = c*sqrt(G*M/(r(0)**3))
+  ! Parâmetros da simulação
+  real(dp) :: tf = 940 ! Tempo para simulação
+  real(dp) :: r0 = 60 ! Raio inicial em U.A.
+  real(dp) :: phi0 = 0 ! phi inicial
+  real(dp) :: vr0 = 0.01*c !  velocidade radial inicial
+  real(dp) :: vphi0 = 0.01*pi  ! velocidade angular inicial
+  real(dp) :: h = 1e-2 ! tamanho do passo
+  real(dp), allocatable :: t(:), r(:), phi(:), vr(:), vphi(:), r_teste(:)
+  real(dp) :: vr_valido(20000,2)
+  integer(i8) :: i,j, n_steps
 
-    
-    ! Integração com verificação de validade
-    do i = 0, n_steps-1
-        call rk4_step(t(i), r(i), phi(i), dr_dt(i), dphi_dt(i), &
-                     t(i+1), r(i+1), phi(i+1), dr_dt(i+1), dphi_dt(i+1), &
-                     is_valid)
-        
-        if (.not. is_valid .or. r(i+1) <= Rs) then
-            print *, "Simulação interrompida no passo:", i
-            print *, "Tempo coordenado (s):", t(i)
-            print *, "Raio (Rs):", r(i)/Rs
-            n_steps = i
-            exit
+  j = 1
+  n_steps = int(tf/h)
+ 
+
+  do while (vphi0 < 6.3)
+     vphi0 = vphi0 + 0.01*pi
+     vr0 = 0.1*c
+     do while (vr0 < c) 
+        vr0 = vr0 + 0.01*c
+        r_teste = rk4(h, tf, r0, phi0, vr0, vphi0, t, r, phi, vr, vphi)
+        if ((isnan(r_teste(n_steps-1)) .eqv. (.false.)) .and. (r_teste(n_steps-1) < 1e10)) then
+           vr_valido(j,1) = vr0
+           vr_valido(j,2) = vphi0
+           j = j + 1
         end if
-    end do
-    
-    call save_results(t, r, phi, dr_dt, dphi_dt, n_steps)
-    
-    deallocate(t, r, phi, dr_dt, dphi_dt)
-    
-
-
-    
-
+     end do
+  end do
+             
+  print *, j
+  open(unit=10, file='parametros_validos.txt', status='replace')
+  do i = 1, int(tf/h) 
+     write (10,*) vr_valido
+  end do
+  close(10)
   
 end program main

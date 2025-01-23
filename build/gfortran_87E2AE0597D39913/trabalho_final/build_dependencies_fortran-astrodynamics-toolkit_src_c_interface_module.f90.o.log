@@ -1,0 +1,5 @@
+build/dependencies/fortran-astrodynamics-toolkit/src/c_interface_module.f90:59:45:
+
+   59 |     class(geopotential_model),pointer :: grav  !! the data in the container
+      |                                             1
+Warning: Unused variable ‘grav’ declared at (1) [-Wunused-variable]

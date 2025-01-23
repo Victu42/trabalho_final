@@ -1,0 +1,25 @@
+build/dependencies/fortran-astrodynamics-toolkit/src/vector_module.f90:93:8:
+
+   93 |     if (rmag==zero) then
+      |        1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+build/dependencies/fortran-astrodynamics-toolkit/src/vector_module.f90:366:8:
+
+  366 |     if (r/=zero) then
+      |        1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+build/dependencies/fortran-astrodynamics-toolkit/src/vector_module.f90:368:12:
+
+  368 |         if (r1/=zero) then
+      |            1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+build/dependencies/fortran-astrodynamics-toolkit/src/vector_module.f90:263:8:
+
+  263 |     if (bmag2==zero) then
+      |        1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+build/dependencies/fortran-astrodynamics-toolkit/src/vector_module.f90:120:8:
+
+  120 |     if (umag == zero) then  !singularity
+      |        1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]

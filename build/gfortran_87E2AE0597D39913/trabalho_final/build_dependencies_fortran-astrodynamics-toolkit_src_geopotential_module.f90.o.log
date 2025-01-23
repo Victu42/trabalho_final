@@ -1,0 +1,99 @@
+build/dependencies/fortran-astrodynamics-toolkit/src/geopotential_module.f90:872:8:
+
+  872 |     if (r1==zero) then
+      |        1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+build/dependencies/fortran-astrodynamics-toolkit/src/geopotential_module.f90:1220:29:
+
+ 1204 |     do n = 0,nmax
+      |                 2            
+......
+ 1220 |                 dnm    = cnm(n,m)*rm(m_ri)   + snm(n,m)*im(m_ri)
+      |                             1
+Warning: Array reference at (1) out of bounds (0 < 1) in loop beginning at (2) [-Wdo-subscript]
+build/dependencies/fortran-astrodynamics-toolkit/src/geopotential_module.f90:1220:51:
+
+ 1204 |     do n = 0,nmax
+      |                 2                                  
+......
+ 1220 |                 dnm    = cnm(n,m)*rm(m_ri)   + snm(n,m)*im(m_ri)
+      |                                                   1
+Warning: Array reference at (1) out of bounds (0 < 1) in loop beginning at (2) [-Wdo-subscript]
+build/dependencies/fortran-astrodynamics-toolkit/src/geopotential_module.f90:1221:29:
+
+ 1204 |     do n = 0,nmax
+      |                 2            
+......
+ 1221 |                 enm    = cnm(n,m)*rm(m_ri-1) + snm(n,m)*im(m_ri-1)
+      |                             1
+Warning: Array reference at (1) out of bounds (0 < 1) in loop beginning at (2) [-Wdo-subscript]
+build/dependencies/fortran-astrodynamics-toolkit/src/geopotential_module.f90:1221:51:
+
+ 1204 |     do n = 0,nmax
+      |                 2                                  
+......
+ 1221 |                 enm    = cnm(n,m)*rm(m_ri-1) + snm(n,m)*im(m_ri-1)
+      |                                                   1
+Warning: Array reference at (1) out of bounds (0 < 1) in loop beginning at (2) [-Wdo-subscript]
+build/dependencies/fortran-astrodynamics-toolkit/src/geopotential_module.f90:1222:29:
+
+ 1204 |     do n = 0,nmax
+      |                 2            
+......
+ 1222 |                 fnm    = snm(n,m)*rm(m_ri-1) - cnm(n,m)*im(m_ri-1)
+      |                             1
+Warning: Array reference at (1) out of bounds (0 < 1) in loop beginning at (2) [-Wdo-subscript]
+build/dependencies/fortran-astrodynamics-toolkit/src/geopotential_module.f90:1222:51:
+
+ 1204 |     do n = 0,nmax
+      |                 2                                  
+......
+ 1222 |                 fnm    = snm(n,m)*rm(m_ri-1) - cnm(n,m)*im(m_ri-1)
+      |                                                   1
+Warning: Array reference at (1) out of bounds (0 < 1) in loop beginning at (2) [-Wdo-subscript]
+build/dependencies/fortran-astrodynamics-toolkit/src/geopotential_module.f90:1053:20:
+
+ 1037 |     do m = 0,nm
+      |               2     
+......
+ 1053 |             cmm = c(m,m)
+      |                    1
+Warning: Array reference at (1) out of bounds (0 < 1) in loop beginning at (2) [-Wdo-subscript]
+build/dependencies/fortran-astrodynamics-toolkit/src/geopotential_module.f90:1054:20:
+
+ 1037 |     do m = 0,nm
+      |               2     
+......
+ 1054 |             smm = s(m,m)
+      |                    1
+Warning: Array reference at (1) out of bounds (0 < 1) in loop beginning at (2) [-Wdo-subscript]
+build/dependencies/fortran-astrodynamics-toolkit/src/geopotential_module.f90:1149:42:
+
+ 1149 |     real(wp),dimension(3) :: harmonics_acc
+      |                                          1
+Warning: Unused variable ‘harmonics_acc’ declared at (1) [-Wunused-variable]
+build/dependencies/fortran-astrodynamics-toolkit/src/geopotential_module.f90:1000:27:
+
+ 1000 |     real(wp) :: am, an, pnn, pnm1m, pnm2m, sm, cm, sml, cml
+      |                           1
+Warning: Unused variable ‘pnn’ declared at (1) [-Wunused-variable]
+build/dependencies/fortran-astrodynamics-toolkit/src/geopotential_module.f90:998:27:
+
+  998 |     real(wp) :: r, q, t, u2, u, um, tf, al, sl, cl, gmr
+      |                           1
+Warning: Unused variable ‘u2’ declared at (1) [-Wunused-variable]
+build/dependencies/fortran-astrodynamics-toolkit/src/geopotential_module.f90:998:34:
+
+  998 |     real(wp) :: r, q, t, u2, u, um, tf, al, sl, cl, gmr
+      |                                  1
+Warning: Unused variable ‘um’ declared at (1) [-Wunused-variable]
+build/dependencies/fortran-astrodynamics-toolkit/src/geopotential_module.f90:204:65:
+
+  204 |     subroutine compute_gravity_acceleration_kuga_carrara(me,r,n,m,a)
+      |                                                                 1
+Warning: Unused dummy argument ‘m’ at (1) [-Wunused-dummy-argument]
+build/dependencies/fortran-astrodynamics-toolkit/src/geopotential_module.f90:164:58:
+
+  164 |     subroutine compute_gravity_acceleration_pines(me,r,n,m,a)
+      |                                                          1
+Warning: Unused dummy argument ‘m’ at (1) [-Wunused-dummy-argument]
