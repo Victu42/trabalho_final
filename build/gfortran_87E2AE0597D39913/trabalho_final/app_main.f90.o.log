@@ -1,0 +1,5 @@
+app/main.f90:7:68:
+
+    7 |   real(dp), allocatable :: t(:), r(:), phi(:), vr(:), vphi(:), pr(:)
+      |                                                                    1
+Warning: Unused variable ‘pr’ declared at (1) [-Wunused-variable]

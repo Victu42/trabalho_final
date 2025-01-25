@@ -4,41 +4,19 @@ program main
   use calculo_orbitas
   
   implicit none
-
+  real(dp), allocatable :: t(:), r(:), phi(:), vr(:), vphi(:), pr(:)
+  
   ! Parâmetros da simulação
-  real(dp) :: tf = 940 ! Tempo para simulação
-  real(dp) :: r0 = 60 ! Raio inicial em U.A.
-  real(dp) :: phi0 = 0 ! phi inicial
-  real(dp) :: vr0 = 0.01*c !  velocidade radial inicial
-  real(dp) :: vphi0 = 0.01*pi  ! velocidade angular inicial
-  real(dp) :: h = 1e-2 ! tamanho do passo
-  real(dp), allocatable :: t(:), r(:), phi(:), vr(:), vphi(:), r_teste(:)
-  real(dp) :: vr_valido(20000,2)
-  integer(i8) :: i,j, n_steps
+  tf = 1000 ! Tempo para simulação em anos
+  phi0 = 0.0 ! phi inicial
+  vr0 = 0.0 !  velocidade radial inicial
+  vphi0 = 0.0  ! velocidade angular inicial
+  M = G*4e36/c**2 ! massas solares
+  r0 = 5*M ! Raio inicial em U.A.
+  h = 1 ! tamanho do passo           
+  
+  !call checar_parametros(M, tf, r0, phi0, vr0, vphi0, h, t, r, phi, vr, vphi)
 
-  j = 1
-  n_steps = int(tf/h)
- 
-
-  do while (vphi0 < 6.3)
-     vphi0 = vphi0 + 0.01*pi
-     vr0 = 0.1*c
-     do while (vr0 < c) 
-        vr0 = vr0 + 0.01*c
-        r_teste = rk4(h, tf, r0, phi0, vr0, vphi0, t, r, phi, vr, vphi)
-        if ((isnan(r_teste(n_steps-1)) .eqv. (.false.)) .and. (r_teste(n_steps-1) < 1e10)) then
-           vr_valido(j,1) = vr0
-           vr_valido(j,2) = vphi0
-           j = j + 1
-        end if
-     end do
-  end do
-             
-  print *, j
-  open(unit=10, file='parametros_validos.txt', status='replace')
-  do i = 1, int(tf/h) 
-     write (10,*) vr_valido
-  end do
-  close(10)
+  call orbit_data(h, tf, r0, phi0, vr0, vphi0, t, r, phi, vr, vphi)
   
 end program main
