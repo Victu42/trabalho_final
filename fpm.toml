@@ -7,6 +7,7 @@ copyright = "Copyright 2025, Jane Doe"
 [dependencies]
 
 fortran-astrodynamics-toolkit = { git="https://github.com/jacobwilliams/Fortran-Astrodynamics-Toolkit.git" }
+rklib = { git="https://github.com/jacobwilliams/rklib.git" }
 
 [build]
 auto-executables = true

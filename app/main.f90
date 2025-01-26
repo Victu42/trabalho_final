@@ -7,15 +7,13 @@ program main
   real(dp), allocatable :: t(:), r(:), phi(:), vr(:), vphi(:), pr(:)
   
   ! Parâmetros da simulação
-  tf = 1000 ! Tempo para simulação em anos
-  phi0 = 0.0 ! phi inicial
-  vr0 = 0.0 !  velocidade radial inicial
-  vphi0 = 0.0  ! velocidade angular inicial
-  M = G*4e36/c**2 ! massas solares
-  r0 = 5*M ! Raio inicial em U.A.
-  h = 1 ! tamanho do passo           
-  
-  !call checar_parametros(M, tf, r0, phi0, vr0, vphi0, h, t, r, phi, vr, vphi)
+  M = 1 ! massa do objeto
+  tf = 3 ! Tempo para simulação em anos
+  r0 = 2.3 ! Raio inicial em U.A.
+  phi0 = pi/2 ! phi inicial
+  vr0 = 1e-30 !  velocidade radial inicial
+  vphi0 = 3.5*pi ! velocidade angular inicial
+  h = 1e-4 ! tamanho do passo           
 
   call orbit_data(h, tf, r0, phi0, vr0, vphi0, t, r, phi, vr, vphi)
   

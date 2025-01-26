@@ -6,9 +6,20 @@ version = "0"
 proj-dir = "build/dependencies/fortran-astrodynamics-toolkit"
 git = "https://github.com/jacobwilliams/Fortran-Astrodynamics-Toolkit.git"
 rev = "7f5c23a7b474c25561da451840a05af113d65b44"
+[rklib]
+version = "0"
+proj-dir = "build/dependencies/rklib"
+git = "https://github.com/jacobwilliams/rklib.git"
+rev = "b1369bd368652a5ea108da41959c9417d4ea90c6"
 [pyplot-fortran]
 version = "3.1.0"
 proj-dir = "build/dependencies/pyplot-fortran"
 git = "https://github.com/jacobwilliams/pyplot-fortran.git"
 rev = "60c5690c4e8d20d3185620db44111ca75ed7ebc3"
+[roots-fortran]
+version = "0"
+proj-dir = "build/dependencies/roots-fortran"
+git = "https://github.com/jacobwilliams/roots-fortran"
+obj = "1.4.0"
+rev = "f836b63f2721401b91eed7f83aa941b6d435b307"
 
