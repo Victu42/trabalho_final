@@ -4,7 +4,7 @@ use, intrinsic :: iso_fortran_env, only: sp => real32, dp => real64, i4 => int32
 implicit none
 
 real(dp), parameter :: pi = 16*ATAN(1./5.) - 4*ATAN(1./239.)
-real(dp), parameter :: c = 63197.8 ! m/s
+real(dp), parameter :: c = 299792458 ! m/s
 real(dp) :: M_kg, tf, r0, phi0, vr0, vphi0, h
 real(dp), parameter :: G = 6.670430E-11
 
@@ -13,18 +13,16 @@ contains
 
     function M(M_kg) result(m_real)
    
-   real(dp) :: M_kg, c, m_real
+   real(dp) :: M_kg, m_real
 
-   c = 299792458
-   m_real = (G*M_kg/c**2)
+   m_real = M_kg!(G*M_kg/c**2)
 
   end function M
 
   function Rs(M_kg) result(r_s)
    
-   real(dp) :: M_kg, r_s, c
+   real(dp) :: M_kg, r_s
 
-   c = 299792458
    r_s = (2*G*M_kg/c**2)/1.496e11
 
   end function Rs
