@@ -5,11 +5,20 @@ implicit none
 
 real(dp), parameter :: pi = 16*ATAN(1./5.) - 4*ATAN(1./239.)
 real(dp), parameter :: c = 63197.8 ! m/s
-real(dp) :: M, tf, r0, phi0, vr0, vphi0, h
+real(dp) :: M_kg, tf, r0, phi0, vr0, vphi0, h
 real(dp), parameter :: G = 6.670430E-11
 
 
 contains
+
+    function M(M_kg) result(m_real)
+   
+   real(dp) :: M_kg, c, m_real
+
+   c = 299792458
+   m_real = M_kg!(G*M_kg/c**2)/1.496e11
+
+  end function M
 
   function Rs(M_kg) result(r_s)
    
@@ -24,7 +33,7 @@ contains
     
     real(dp) :: r, dphi, f
 
-    f = ((-4*M**2)+(2*M*r)+(r-5*M)*(r**3)*(dphi**2))/r**3
+    f = ((-4*M(M_kg)**2)+(2*M(M_kg)*r)+(r-5*M(M_kg))*(r**3)*(dphi**2))/r**3
 
   end function ar_luz
 
@@ -32,8 +41,8 @@ contains
     
     real(dp) :: r, dphi, f, dr
 
-    f = ((4*(M**3))-(4*r*(M**2))-(4*(M**2)*(r**3)*(dphi**2))+(4*M*(r**4)*(dphi**2))-((r**5) &
-    *dphi**2)+(r**2)*(M-3*M*(dr**2)))/((2*M-r)*(r**3))
+    f = ((4*(M(M_kg)**3))-(4*r*(M(M_kg)**2))-(4*(M(M_kg)**2)*(r**3)*(dphi**2))+(4*M(M_kg)*(r**4)*(dphi**2))-((r**5) &
+    *dphi**2)+(r**2)*(M(M_kg)-3*M(M_kg)*(dr**2)))/((2*M(M_kg)-r)*(r**3))
 
   end function ar
 
@@ -41,7 +50,7 @@ contains
      
     real(dp) :: r, dr, dphi, f
   
-    f = 2*(-3*M+r)*dr*dphi/((2*M-r)*r)
+    f = 2*(-3*M(M_kg)+r)*dr*dphi/((2*M(M_kg)-r)*r)
 
   end function aphi
 
@@ -71,33 +80,35 @@ contains
        t(i) = t(i-1) + tf/steps 
     end if
 
-    k1_r = r(i)
-    k1_vr = vr(i)
-    k1_phi = phi(i)
-    k1_vphi = vphi(i)
-    k2_r = vr(i)+h*k1_vr/2
-    k2_vr = ar(r(i)+h*k1_r/2,vr(i)+h*k1_vr/2,vphi(i)+h*k1_vphi/2)
-    k2_phi = vphi(i)+h*k1_vphi/2
-    k2_vphi = aphi(r(i)+h*k1_r/2,vr(i)+h*k1_vr/2,vphi(i)+h*k1_vphi/2)
-    k3_r = vr(i)+h*k2_vr/2
-    k3_vr = ar(r(i)+h*k2_r/2,vr(i)+h*k2_vr/2,vphi(i)+h*k2_vphi/2)
-    k3_phi = vphi(i)+h*k2_vphi/2
-    k3_vphi = aphi(r(i)+h*k2_r/2,vr(i)+h*k2_vr/2,vphi(i)+h*k2_vphi/2)
-    k4_r = vr(i)+h*k3_vr
-    k4_vr = ar(r(i)+h*k3_r,vr(i)+h*k3_vr,vphi(i)+h*k3_vphi)
-    k4_phi = vphi(i)+h*k3_vphi
-    k4_vphi = aphi(r(i)+h*k3_r,vr(i)+h*k3_vr,vphi(i)+h*k3_vphi)
+    k1_r = h*r(i)
+    k1_vr = h*vr(i)
+    k1_phi = h*phi(i)
+    k1_vphi = h*vphi(i)
+    k2_r = h*vr(i)+h*k1_vr/2
+    k2_vr = h*ar(r(i)+k1_r/2,vr(i)+k1_vr/2,vphi(i)+k1_vphi/2)
+    k2_phi = h*vphi(i)+h*k1_vphi/2
+    k2_vphi = h*aphi(r(i)+k1_r/2,vr(i)+k1_vr/2,vphi(i)+k1_vphi/2)
+    k3_r = h*vr(i)+h*k2_vr/2
+    k3_vr = h*ar(r(i)+k2_r/2,vr(i)+k2_vr/2,vphi(i)+k2_vphi/2)
+    k3_phi = h*vphi(i)+h*k2_vphi/2
+    k3_vphi = h*aphi(r(i)+k2_r/2,vr(i)+k2_vr/2,vphi(i)+k2_vphi/2)
+    k4_r = h*vr(i)+h*k3_vr
+    k4_vr = h*ar(r(i)+k3_r,vr(i)+k3_vr,vphi(i)+k3_vphi)
+    k4_phi = h*vphi(i)+h*k3_vphi
+    k4_vphi = h*aphi(r(i)+k3_r,vr(i)+k3_vr,vphi(i)+k3_vphi)
 
-    r(i+1) = r(i) + h*(k1_r+2*k2_r+2*k3_r+k4_r)/6
-    vr(i+1) = vr(i) + h*(k1_vr+2*k2_vr+2*k3_vr+k4_vr)/6
-    phi(i+1) = phi(i) + h*(k1_phi+2*k2_phi+2*k3_phi+k4_phi)/6
-    vphi(i+1) = vphi(i) + h*(k1_vphi+2*k2_vphi+2*k3_vphi+k4_vphi)/6
+    r(i+1) = r(i) + (k1_r+2*k2_r+2*k3_r+k4_r)/6
+    vr(i+1) = vr(i) + (k1_vr+2*k2_vr+2*k3_vr+k4_vr)/6
+    phi(i+1) = phi(i) + (k1_phi+2*k2_phi+2*k3_phi+k4_phi)/6
+    vphi(i+1) = vphi(i) + (k1_vphi+2*k2_vphi+2*k3_vphi+k4_vphi)/6
     
     write(10,*) t(i), phi(i), r(i)
 
    end do
 
    close(10)
+
+  deallocate(t,r,phi,vr,vphi)
 
   end subroutine orbit_data
 
