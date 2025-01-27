@@ -16,7 +16,7 @@ contains
    real(dp) :: M_kg, c, m_real
 
    c = 299792458
-   m_real = M_kg!(G*M_kg/c**2)/1.496e11
+   m_real = (G*M_kg/c**2)
 
   end function M
 
