@@ -18,7 +18,7 @@ O projeto oferece as seguintes funcionalidades:
 
 3. **Plotando os Dados**
    - Os dados gerados podem ser plotados diretamente após a geração, apenas executando o programa plot.py (escrito em Python)
-   em um interpretador.   
+   em um interpretador. Um arquivo com lista de requisitos está registrado comoo 'requirements.txt'.
 
 
 ### Passos para Executar o Projeto

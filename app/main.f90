@@ -8,16 +8,18 @@ program main
   
   ! Parâmetros da simulação
 
-  M = 3e36 ! massa do objeto
-  tf = 20 ! Tempo para simulação 
-  r0 =  4*M! Raio inicial 
+  M = 3e6 ! massa do objeto
+  tf = 100 ! Tempo para simulação 
+  r0 = 3*M! Raio inicial 
   phi0 = 0 ! phi inicial
-  vr0 = 0.02*c_UA ! velocidade radial inicial
-  vphi0 = 1e-30 ! velocidade angular inicial
-  h = 1e-5! tamanho do passo           
+  vr0 = 0.02*c_UA !velocidade radial inicial
+  vphi0 = pi/2 ! velocidade angular inicial
+  vr0_luz = c_UA
+  vphi0_luz = pi/4
+  h = 1e-3! tamanho do passo           
 
   call orbit_data(h, tf, r0, phi0, vr0, vphi0, t, r, phi, vr, vphi)
-  call ver_orbitas(h, tf, r0, phi0, c_m_s, vphi0, t, r, phi, vr, vphi)
+  call ver_orbitas(h, tf, r0, phi0, vr0_luz, vphi0_luz, t, r, phi, vr, vphi)
 
 end program main
 

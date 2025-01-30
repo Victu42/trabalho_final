@@ -6,7 +6,7 @@ implicit none
 real(dp), parameter :: pi = 16*ATAN(1./5.) - 4*ATAN(1./239.)
 real(dp), parameter :: c_m_s = 299792458 
 real(dp), parameter :: c_UA = 63197.7909261 
-real(dp) :: M, tf, r0, phi0, vr0, vphi0, h
+real(dp) :: M, tf, r0, phi0, vr0, vphi0, h, vr0_luz, vphi0_luz
 real(dp), parameter :: G = 6.670430E-11
 
 
