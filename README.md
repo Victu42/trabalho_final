@@ -11,7 +11,7 @@ O projeto oferece as seguintes funcionalidades:
 
 1. **Simulação das Órbitas**:
    - `orbit_data(h, tf, r0, phi0, vr0, vphi0, t, r, phi, vr, vphi)`: Simula a órbita usando o método de Runge-Kutta de 4ª ordem. Os dados são salvos em um arquivo chamado `orbit_data.txt`.
-   - `ver_orbitas(h, tf, r0, phi0, vr0, vphi0, t, r, phi, vr, vphi)`: Simula a órbita da luz usando o método de Runge-Kutta de 4ª ordem. Os dados são salvos em um arquivo chamado`eye_data.txt`.
+   - `ver_orbitas(h, tf, r0, phi0, c, vphi0, t, r, phi, vr, vphi)`: Simula a órbita da luz usando o método de Runge-Kutta de 4ª ordem. Os dados são salvos em um arquivo chamado`eye_data.txt`.
 
 2. **Geração de Dados**:
    - Os resultados das simulações são salvos em arquivos de texto (`orbit_data.txt` e `eye_data.txt`), contendo informações sobre o tempo (`t`), ângulo (`phi`), e distância radial (`r`).
